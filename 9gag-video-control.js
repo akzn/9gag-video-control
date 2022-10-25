@@ -1,12 +1,12 @@
 // ==UserScript==
-// @name     9gag show video control
+// @name         9gag show video control
 // @namespace    http://javalatte.xyz 
 // @version      1.5.0
 // @description  add video controls to 9gag gif and video post. Add volume slider on chrome browser
 // @grant        GM_addStyle
 // @grant        GM_getValue
 // @grant        GM_setValue
-// @require  http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
+// @require      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @author       Akzn
 // @match        https://9gag.com/*
 // ==/UserScript==
