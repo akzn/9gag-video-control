@@ -3,7 +3,9 @@ A userscript to add some feature to control video and gif posts at 9gag.com open
 
 use it with tampermonkey or greasymonkey
 
-https://greasyfork.org/en/scripts/37353-9gag-show-video-control
+[Greasyfork page](https://greasyfork.org/en/scripts/37353-9gag-show-video-control)
+
+[github page](https://github.com/akzn/9gag-video-control)
 
 ## Feature
 - Add Button to toggle on/off video autoplay
@@ -13,8 +15,10 @@ https://greasyfork.org/en/scripts/37353-9gag-show-video-control
 ## Changelog
 ### 1.5.1
 - Add fix for Firefox browser
+  
 ### 1.5.0
 - Add Button to toggle on/off video autoplay
+  
 ### 1.4.4
 - Add a feature to show html5 video on video and gif posts at 9gag.com
 - Default video volume set to 50%.
