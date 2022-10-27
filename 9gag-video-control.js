@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         9gag show video control
 // @namespace    http://javalatte.xyz 
-// @version      1.5.1
+// @version      1.5.2
 // @description  add video controls to 9gag gif and video post. Add volume slider on chrome browser
 // @grant        GM_addStyle
 // @grant        GM_getValue
@@ -18,36 +18,7 @@ var isFirefox = (navigator.userAgent.indexOf("Firefox") != -1)? true : false;
 
 //--- CSS styles
 //--- Button autoplay
-GM_addStyle ( (<><![CDATA[
-    .gmPersistentButton {
-        background:         var(--palette-primary);
-        position:           fixed;
-        bottom:                1em;
-        right:              1em;
-        z-index:            6666;
-        border-radius:      18px;
-    }
-    .gmPersistentButton button {
-        cursor:             pointer;
-        background:         var(--palette-primary);
-        color:               white;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 20px;
-        letter-spacing: 0em;
-        bottom:                1em;
-        right:              1em;
-        z-index:            6666;
-        padding:            1em;
-        border:             var(--palette-primary);
-        border-radius:      18px;
-        opacity:            0.8;
-    }
-    .gmPersistentButton:hover, .gmPersistentButton button:hover {
-        background-color: var(--palette-primary-hover);
-    }
-  ]]></>).toString () );
+GM_addStyle (".gmPersistentButton {background: var(--palette-primary);position: fixed;bottom: 1em;right: 1em;z-index: 6666;border-radius: 18px;}.gmPersistentButton button {cursor: pointer;background: var(--palette-primary);color: white;font-size: 14px;font-style: normal;font-weight: 700;line-height: 20px;letter-spacing: 0em;bottom: 1em;right: 1em;z-index: 6666;padding: 1em;border: var(--palette-primary);border-radius: 18px;opacity: 0.8;}.gmPersistentButton:hover, .gmPersistentButton button:hover {background-color: var(--palette-primary-hover);}");
 
 // Slider for chrome
 if(isChrome==true){
