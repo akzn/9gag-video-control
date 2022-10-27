@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         9gag show video control
 // @namespace    http://javalatte.xyz 
-// @version      1.5.0
+// @version      1.5.1
 // @description  add video controls to 9gag gif and video post. Add volume slider on chrome browser
 // @grant        GM_addStyle
 // @grant        GM_getValue
@@ -14,6 +14,7 @@
 'use strict';
 var timer;
 var isChrome = !!window.chrome && !!window.chrome.webstore;
+var isFirefox = (navigator.userAgent.indexOf("Firefox") != -1)? true : false;
 
 //--- CSS styles
 //--- Button autoplay
@@ -152,26 +153,23 @@ function addVideoControl(){
         elem.setAttribute("preload","none")
 
         if(!elem.hasAttribute("controls")){
-
             //--- bind play button
-            //-- unfinished, 
-            // $(elem).bind('play', function (e) {
-            //     console.log(';asd')
-            //     // e.setAttribute("pause", "false");
-            //     e.target.setAttribute('pause','false')
-            // });
-            // $(elem).bind('pause', function (e) {
-            //     console.log(';asd')
-            //     // e.setAttribute("pause", "true");
-            //     e.target.setAttribute('pause','true')
-            // });
+            $(elem).bind('play', function (e) {
+                isViewable = isElementXPercentInViewport(e.target,90)
+                if (isViewable) {
+                    e.target.setAttribute('pause','false')
+                }
+            });
+            $(elem).bind('pause', function (e) {
+                e.target.setAttribute('pause','true')
+            });
 
-            elem.setAttribute("controls", "");
+            elem.setAttribute("controls", "");            
             elem.volume = 0.5;
 
             setVideoPlay(elem)
 
-            console.log('video controls added');
+            // console.log('video controls added');
             
             //add volume slider to chrome video. Why tf chrome dev removed their dafault slider
             if((elem.parentNode.parentNode.getElementsByClassName('video-post').length>0) && (isChrome == true)){
@@ -214,6 +212,10 @@ function addVideoControl(){
             elem.parentNode.parentNode.querySelector('.video-post').addEventListener("click",handlePauseBox,false)
         }
 
+        if(elem.parentNode.parentNode.querySelector('.gif-post')){
+            elem.parentNode.parentNode.querySelector('.gif-post').addEventListener("click",handlePauseBox,false)
+        }
+
     }
 }
 
@@ -233,7 +235,6 @@ function setVolume(evt){
 
 function handlePauseBox(evt){
     var elem = evt.target;
-    console.log('asd')
     setVideoPlay(elem.getElementsByTagName('video')[0])
 }
 
@@ -270,14 +271,29 @@ function setVideoPlay(elem,buttonStorageValue = null){
     
 }
 
+// TO check viewbility
+const isElementXPercentInViewport = function(el, percentVisible) {
+    let
+      rect = el.getBoundingClientRect(),
+      windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+  
+    return !(
+      Math.floor(100 - (((rect.top >= 0 ? 0 : rect.top) / +-rect.height) * 100)) < percentVisible ||
+      Math.floor(100 - ((rect.bottom - windowHeight) / rect.height) * 100) < percentVisible
+    )
+};
+
+// handle toggle autoplay
 function _handlegmAutoplayVideoBtnClick(value){
     var vids = document.getElementsByTagName('video');
     for( var i = 0; i < vids.length; i++ ){           
         var elem = vids.item(i);
         setVideoPlay(elem,value)
     }
-    console.log('asd')
-    console.log(value)
+    console.log('autoplay : '+value)
 }
 
 timer = setInterval(addVideoControl, 300);
+
+
+
